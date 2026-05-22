@@ -1,36 +1,50 @@
-public void sendOtp(String toEmail, String otp) {
+package com.learninghub.service;
 
-    try {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 
-        SimpleMailMessage message =
-                new SimpleMailMessage();
+@Service
+public class EmailService {
 
-        message.setTo(toEmail);
+    @Autowired
+    private JavaMailSender mailSender;
 
-        message.setSubject(
-                "LearningHub OTP Verification"
-        );
+    public void sendOtp(String toEmail, String otp) {
 
-        message.setText(
-                "Your OTP is: " + otp
-        );
+        try {
 
-        mailSender.send(message);
+            SimpleMailMessage message =
+                    new SimpleMailMessage();
 
-        System.out.println(
-                "OTP SENT SUCCESSFULLY"
-        );
+            message.setTo(toEmail);
 
-    } catch (Exception e) {
+            message.setSubject(
+                    "LearningHub OTP Verification"
+            );
 
-        System.out.println(
-                "MAIL ERROR:"
-        );
+            message.setText(
+                    "Your OTP is: " + otp
+            );
 
-        e.printStackTrace();
+            mailSender.send(message);
 
-        throw new RuntimeException(
-                "Failed to send email"
-        );
+            System.out.println(
+                    "OTP SENT SUCCESSFULLY"
+            );
+
+        } catch (Exception e) {
+
+            System.out.println(
+                    "MAIL ERROR:"
+            );
+
+            e.printStackTrace();
+
+            throw new RuntimeException(
+                    "Failed to send email"
+            );
+        }
     }
 }
