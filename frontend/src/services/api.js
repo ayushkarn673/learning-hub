@@ -1,9 +1,8 @@
 import axios from "axios";
 
-// Use relative base so Vite's dev proxy (→ localhost:8080) handles routing.
-// In production, point this to your deployed backend URL.
+// In production, point directly to your deployed backend URL.
 const API = axios.create({
-    baseURL: "/",
+    baseURL: "https://learning-hub-tkm0.onrender.com",
     headers: {
         "Content-Type": "application/json",
     },
